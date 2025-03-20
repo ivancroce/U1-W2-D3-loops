@@ -245,11 +245,11 @@ const spaceship = crewMass;
 
 if (spaceship < 500) {
   console.log("Ship is under loaded");
-} else if (spaceship >= 500 && spaceship <= 700) {
+} else if (spaceship >= 500 && spaceship < 700) {
   console.log("Ship is half loaded");
-} else if (spaceship > 700 && spaceship <= 900) {
+} else if (spaceship >= 700 && spaceship < 900) {
   console.log("Warning: Load is over 700");
-} else if (spaceship > 900 && spaceship <= 1000) {
+} else if (spaceship >= 900 && spaceship < 1000) {
   console.log("Critical Load: Over 900");
 } else {
   console.log("DANGER! OVERLOAD ALERT: escape from ship now!");
@@ -277,6 +277,25 @@ if (crewMass < 500) {
   console.log("DANGER! OVERLOAD ALERT: escape from ship now!");
 }
 
+// si potrebbe fare con lo switch
+
+/* switch (true) {
+  case crewMass < 500:
+    console.log("Ship is under loaded");
+    break;
+  case crewMass >= 500 && crewMass <= 700:
+    console.log("Ship is half loaded");
+    break;
+  case crewMass > 700 && crewMass <= 900:
+    console.log("Warning: Load is over 700");
+    break;
+  case crewMass > 900 && crewMass <= 1000:
+    console.log("Critical Load: Over 900");
+    break;
+  default:
+    console.log("DANGER! OVERLOAD ALERT: escape from ship now!");
+} */
+
 /* ESERCIZIO 8
   Usa un for loop per cambiare il valore della proprietà "gender" di alcuni personaggi dal valore "n/a"a  "robot" (Tip: puoi effettuare la riassegnazione del valore corrispondente o creare un nuovo array)
 */
@@ -285,7 +304,9 @@ if (crewMass < 500) {
 
 for (let i = 0; i < starWarsCharacters.length; i++) {
   const character = starWarsCharacters[i];
+
   if (character.gender === "n/a") {
+    console.log(`${character.name} has gender n/a`); // to print who has the n/a gender
     character.gender = `robot`;
   }
 }
@@ -296,6 +317,47 @@ console.log(starWarsCharacters);
   Una volta fatto crea un console.log per controllare la proprietà length di "charactersNames" prima e dopo l'operazione.
 */
 
+for (let i = 0; i < femaleCharacters.length; i++) {
+  //1st array
+  const femChar = femaleCharacters[i].name; // we get the 2 female characters
+  console.log(femChar);
+
+  for (let j = 0; j < charactersNames.length; j++) {
+    // 2nd array
+    const charName = charactersNames[j];
+    //console.log(`${femChar} meets ${charName}`);      // double loop to confront 2 arrays
+
+    if (femChar === charName) {
+      // when leia and beru meet with charName, with splice we remove them from charactersNames
+      console.log(`${femChar} is at index ${j} of the characterNames array`);
+
+      charactersNames.splice(j, 1); // j dinamic value (position) , 1 (eliminate 1)
+    }
+  }
+}
+
 /* --EXTRA-- ESERCIZIO 10
   Crea una funzionalità che selezioni un elemento casuale dall'array "starWarsCharacters" e ne stampi in console le proprietà in modo discorsivo (a tuo piacimento).
 */
+
+const randomCharIndex = Math.floor(Math.random() * starWarsCharacters.length); // Math.floor aggiusta per difetto numero intero
+const charFound = starWarsCharacters[randomCharIndex]; // Math.random random float number between 0 and 0.99 i.e. 0.893438 etc
+console.log(charFound);
+
+console.log("The found character name is:", charFound.name);
+
+if (charFound.gender === "female") {
+  console.log("She is", charFound.height, "cm tall");
+} else {
+  console.log("He is", charFound.height, "cm tall");
+}
+
+if (charFound.hair_color !== "n/a" && charFound.hair_color !== "none") {
+  console.log("and has", charFound.hair_color, "hair,");
+} else {
+  console.log("and bald,");
+}
+
+console.log("with", charFound.skin_color, "skin.");
+
+// to check last line...need to give a random obj and not a random number
